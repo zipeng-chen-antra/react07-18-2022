@@ -46,23 +46,23 @@
 // console.log("final", counter)
 
 
-function getUserData(callback) {
-    setTimeout(() => {
-        const user = { id: 1, name: "patrick", age: 18, companyId: 111 }
-        callback(user)
-    }, 2000)
-}
+// function getUserData(callback) {
+//     setTimeout(() => {
+//         const user = { id: 1, name: "patrick", age: 18, companyId: 111 }
+//         callback(user)
+//     }, 2000)
+// }
 
-function getCompanyData(id, callback) {
-    setTimeout(() => {
-        const company = { companyId: 111, companyName: "Antra" }
-        if (id === company.companyId) {
-            callback(company)
-        } else {
-            callback({ error: "company Does not exist" })
-        }
-    }, 2000)
-}
+// function getCompanyData(id, callback) {
+//     setTimeout(() => {
+//         const company = { companyId: 111, companyName: "Antra" }
+//         if (id === company.companyId) {
+//             callback(company)
+//         } else {
+//             callback({ error: "company Does not exist" })
+//         }
+//     }, 2000)
+// }
 
 // getUserData((user) => {
 //     console.log("getUserData", user)
@@ -194,12 +194,12 @@ class MyPromise {
 
 
 
-const myPromise = new MyPromise((resolve, reject) => {
+const myPromise = new Promise((resolve, reject) => {
     try {
         console.log("promise is running")
         setTimeout(() => {
             try {
-                throw new Error('ERROR')
+                //throw new Error('ERROR')
                 resolve({ msg: "resolve data after 2s" })
             } catch (err) {
                 reject("err")
@@ -215,17 +215,19 @@ const myPromise = new MyPromise((resolve, reject) => {
 myPromise
     .then((data) => {
         console.log("then is running", data)
-        return 5
+        return new Promise((res, rej) => {
+            res(6)
+        })
     }, (err) => {
         console.warn(err)
     }).then((data2) => {
         console.log("then2 is running", data2)
     })
 
-console.log("hello")
-    // .catch((err) => {
-    //     console.log(err)
-    // })
+// console.log("hello")
+// .catch((err) => {
+//     console.log(err)
+// })
 
 
 // function foo() {
@@ -239,3 +241,7 @@ console.log("hello")
 //     }
 // }
 // foo()
+
+// fetch('https://jsonplaceholder.typicode.com/todos/1')
+//     .then(response => response.json())
+//     .then(json => console.log(json))
