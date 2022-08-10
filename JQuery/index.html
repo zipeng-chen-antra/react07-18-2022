@@ -27,69 +27,137 @@
       <button>Show</button>
     </div>
     <script>
-      const $$ = (selector) => {
-        // target the elements based on the selector
-        const elements =
-          document.querySelectorAll(selector);
-        // console.log(elements);
-        // console.log([]);
-        return {
-          html: (innerHTML) => {
-            // change the innerHTML for the target elements
-            elements.forEach((element) => {
-              element.innerHTML = innerHTML;
-            });
-          },
-          hide: () => {
-            elements.forEach((element) => {
-              element.style.display = 'none';
-            });
-          },
-          on: (eventType, callback) => {
-            elements.forEach((element) => {
-              element.addEventListener(
-                eventType,
-                callback
-              );
-            });
-          },
-          show: () => {
-            elements.forEach((element) => {
-              element.style.display = '';
-            });
-          },
-        };
+      class PQuery {
+        constructor(selector) {
+          console.log('in constructor', this);
+          if (
+            selector === document ||
+            selector === window
+          ) {
+            this.elements = [selector];
+          } else {
+            this.elements =
+              document.querySelectorAll(selector);
+          }
+        }
+        static test() {
+          console.log(this);
+          console.log('test');
+        }
+
+        html(innerHTML) {
+          console.log('in html', this);
+
+          // change the innerHTML for the target elements
+          this.elements.forEach((element) => {
+            element.innerHTML = innerHTML;
+          });
+        }
+        hide() {
+          this.elements.forEach((element) => {
+            element.style.display = 'none';
+          });
+        }
+        on(eventType, callback) {
+          this.elements.forEach((element) => {
+            element.addEventListener(
+              eventType,
+              callback
+            );
+          });
+        }
+        show() {
+          this.elements.forEach((element) => {
+            element.style.display = '';
+          });
+        }
+      }
+
+      function PQueryES5(selector) {
+        console.log('in constructor', this);
+        if (
+          selector === document ||
+          selector === window
+        ) {
+          this.elements = [selector];
+        } else {
+          this.elements =
+            document.querySelectorAll(selector);
+        }
+      }
+      PQueryES5.prototype.html = function (
+        innerHTML
+      ) {
+        console.log('in html', this);
+
+        // change the innerHTML for the target elements
+        this.elements.forEach((element) => {
+          element.innerHTML = innerHTML;
+        });
       };
-      //   $$('button.continue').html('Next Step...');
+      PQueryES5.test = function () {};
 
-      //   var hiddenBox = $$('#banner-message');
-      //   hiddenBox.hide();
-      //   $$('#button-container button').on(
-      //     'click',
-      //     function (event) {
-      //       hiddenBox.show();
-      //     }
-      //   );
+      console.log(typeof PQuery);
+      const $$ = (selector) => {
+        return new PQuery(selector);
+      };
+      console.dir(PQuery);
 
-      const btns = $$('button.continue');
-      console.log(btns);
-      const btns2 = $$('button.continue');
-      console.log(btns2);
-      console.log(btns === btns2);
-      console.log(btns.html === btns2.html);
-      console.log('=========');
-      const arr1 = [1, 2, 3];
-      const arr2 = [1, 2, 3];
-      console.log(arr1);
-      console.log(arr1 === arr2);
-      console.log(arr1.map === arr2.map);
+      $$.ajax = ({ url, success }) => {
+        fetch(url)
+          .then((res) => res.json())
+          .then(success);
+      };
+      console.dir($$);
+
+      const $$$ = (selector) => {
+        return new PQueryES5(selector);
+      };
+
+      $$$('button.continue').html('Next Step...');
+
+      var hiddenBox = $$('#banner-message');
+      hiddenBox.hide();
+      $$('#button-container button').on(
+        'click',
+        function (event) {
+          hiddenBox.show();
+        }
+      );
+
+      $$(window).on('click', (e) => {
+        console.log(e.target);
+      });
+
+      // const btns = $$('button.continue');
+      // console.log(btns);
+      // const btns2 = $$('button.continue');
+      // console.log(btns2);
+      // console.log(btns === btns2);
+      // console.log(btns.html === btns2.html);
+      // console.log('=========');
+      // const arr1 = [1, 2, 3];
+      // const arr2 = [1, 2, 3];
+      // console.log(arr1);
+      // console.log(arr1 === arr2);
+      // console.log(arr1.map === arr2.map);
 
       $$.ajax({
         url: 'https://jsonplaceholder.typicode.com/todos/1',
         success: function (result) {
-          console.log('$.ajax:', result);
+          console.log('$$.ajax:', result);
         },
       });
+
+      // const obj = { name: 'patrick' };
+      // function foo() {}
+      // console.dir(obj);
+      // console.dir(foo);
+      // console.dir([]);
+
+      // $(window).ready(function () {
+      //   alert('document is ready');
+      // });
     </script>
   </body>
 </html>
