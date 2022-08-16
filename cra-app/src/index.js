@@ -3,30 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const MyReactDOM = {
-  render: (ReactElement, domElement) => {
-    const { type, props } = ReactElement;
-    const curDom = document.createElement(type);
-    Object.keys(props).forEach(key => {
-      console.log(key)
-      if (key === 'children') {
-        const curChildren = props[key];
-        if (typeof curChildren === 'string') {
-          document.createTextNode(curChildren);
-          curDom.append(curChildren)
-        }
-      } else {
-        curDom[key] = props[key]
-      }
-    })
-    domElement.append(curDom)
-  }
+import CounterClass from './components/CounterClass';
 
-}
-const Test = <h1 className="heading">Test</h1>
-console.log(Test)
+import MyReact from './MyReact/MyReact';
+import MyReactDOM from './MyReact/MyReactDom'
 
-MyReactDOM.render(Test
+// const Test = <section className="counter__container">
+//   <header>Counter:0</header>
+//   <div className="counter__actions">
+//     <button onClick={() => console.log("+")}>+</button>
+//     <button onClick={() => console.log("-")}>-</button>
+//   </div>
+// </section>
+// console.log(Test)
+
+console.log(CounterClass);
+console.log(<CounterClass />);
+
+
+MyReactDOM.render(<CounterClass title="patrick coutner" />
   ,
   document.getElementById('root')
 );
