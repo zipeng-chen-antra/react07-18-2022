@@ -1,10 +1,10 @@
 import React from 'react';
 import { MyReact } from '../MyReact/MyReactDom'
-class CounterClass extends MyReact.Component {
+class CounterClass extends React.Component {
 
     constructor(...args) {
         super(...args)
-        console.log('constructor')
+        // console.log('constructor')
 
         this.state = {
             title: "CounterClass",
@@ -12,12 +12,12 @@ class CounterClass extends MyReact.Component {
         }
         this.handleDec = this.handleDec.bind(this)
         this.handleInc = this.handleInc.bind(this)
-        console.log(document.querySelector("section"))
+        //console.log(document.querySelector("section"))
     }
 
 
     static getDerivedStateFromProps(props, state) {
-        console.log('getDerivedStateFromProps')
+        //console.log('getDerivedStateFromProps')
 
         if (props.title !== state.title) {
             //Change in props
@@ -29,9 +29,23 @@ class CounterClass extends MyReact.Component {
     }
 
     handleInc() {
-        this.setState({
-            counter: this.state.counter + 1
+        // console.log("setState 1:")
+        // this.setState({
+        //     counter: this.state.counter + 1
+        // })
+        // console.log(this.state)
+        // console.log("setState 2:")
+
+        // this.setState({
+        //     counter: this.state.counter + 1
+        // })
+        this.setState(preState => {
+            return { counter: preState.counter + 1 }
         })
+        // this.setState(preState => {
+        //     return { counter: preState.counter + 1 }
+        // })
+
     }
     handleDec() {
         this.setState({
@@ -51,13 +65,13 @@ class CounterClass extends MyReact.Component {
     // }
 
     componentDidMount() {
-        console.log("componentDidMount")
-        console.log(document.querySelector("section"))
+        // console.log("componentDidMount")
+        // console.log(document.querySelector("section"))
     }
 
     render() {
-        console.log('render')
-        console.log(document.querySelector("section"))
+        // console.log('render')
+        // console.log(document.querySelector("section"))
 
         return <section className="counter__container">
             <header>{this.state.title}:{this.state.counter}</header>

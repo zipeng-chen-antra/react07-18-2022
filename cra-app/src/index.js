@@ -7,6 +7,7 @@ import CounterClass from './components/CounterClass';
 
 import MyReact from './MyReact/MyReact';
 import MyReactDOM from './MyReact/MyReactDom'
+import CounterFn from './components/CounterFn';
 
 // const Test = <section className="counter__container">
 //   <header>Counter:0</header>
@@ -17,11 +18,12 @@ import MyReactDOM from './MyReact/MyReactDom'
 // </section>
 // console.log(Test)
 
-console.log(CounterClass);
 console.log(<CounterClass />);
+console.log(<CounterFn />)
 
 
-MyReactDOM.render(<CounterClass title="patrick coutner" />
+ReactDOM.render(
+  <CounterFn />
   ,
   document.getElementById('root')
 );
