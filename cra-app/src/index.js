@@ -18,12 +18,12 @@ import CounterFn from './components/CounterFn';
 // </section>
 // console.log(Test)
 
-console.log(<CounterClass />);
-console.log(<CounterFn />)
+// console.log(<CounterClass />);
+// console.log(<CounterFn />)
 
 
 ReactDOM.render(
-  <CounterFn />
+  <App />
   ,
   document.getElementById('root')
 );
