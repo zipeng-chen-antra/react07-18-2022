@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import CounterClass from './components/CounterClass'
 import CounterFn from './components/CounterFn';
 import BuyStockFn from './components/BuyStock/BuyStockFn';
+import BuyStockClass from './components/BuyStock/BuyStockClass'
 import React from 'react'
 
 
@@ -9,10 +11,19 @@ const pageInfo = [
   {
     pageName: "CounterFn",
     pageComponent: CounterFn
+  },
+  {
+    pageName: "CounterClass",
+    pageComponent: CounterClass
   }, {
 
     pageName: "BuyStockFn",
     pageComponent: BuyStockFn
+  },
+  {
+
+    pageName: "BuyStockClass",
+    pageComponent: BuyStockClass
   }
 ]
 
@@ -21,7 +32,7 @@ function App() {
 
   const renderPage = () => {
     const CurrentPageComponent = curPage.pageComponent;
-    return <CurrentPageComponent />
+    return <CurrentPageComponent test="patrick" />
   }
 
   const handleChangePage = (event, nextPage) => {

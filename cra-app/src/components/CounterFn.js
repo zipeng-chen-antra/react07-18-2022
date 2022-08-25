@@ -46,7 +46,9 @@ let data = 10;
 
 // export default CounterFn;
 
-
+function addOne(num) {
+    return num + 1
+}
 // UI = React(state)
 
 function MyUseEffect(cb, deps) {
