@@ -12,5 +12,10 @@ export const useCounter = (init) => {
 
         setCounter(counter - 1)
     }
-    return [counter, hanldeInc, hanldeDec]
+
+    const handleSetCounter = (newCounter) => {
+
+        setCounter(newCounter)
+    }
+    return [counter, hanldeInc, hanldeDec, handleSetCounter]
 }
