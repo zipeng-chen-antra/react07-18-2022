@@ -66,14 +66,6 @@ const CounterFn = (props) => {
             setStartAlert(true)
         }, 3000)
     }
-    console.log('Line 77')
-    // useEffect(() => { console.log("mount") }, [])
-    // useEffect(() => { console.log("update") })
-    // useEffect(() => {
-    //     setCounter(pre => pre + 2)
-    //     console.log("try")
-    // }, [])
-
     useEffect(() => {
         if (startAlert) {
             alert(counter)

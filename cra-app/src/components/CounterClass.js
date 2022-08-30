@@ -1,6 +1,7 @@
 import React from 'react';
 import withCounter from '../hoc/withCounter';
 import { MyReact } from '../MyReact/MyReactDom'
+import { myConnect } from '../MyRedux/myReactRedux';
 class CounterClass extends React.Component {
 
     constructor(...args) {
@@ -12,6 +13,9 @@ class CounterClass extends React.Component {
 
     }
 
+    componentDidMount(){
+        console.log(this.props)
+    }
 
     render() {
         return <section className="counter__container">
@@ -23,5 +27,7 @@ class CounterClass extends React.Component {
         </section>
     }
 }
+
+
 
 export default withCounter(CounterClass)

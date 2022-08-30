@@ -8,6 +8,8 @@ import CounterClass from './components/CounterClass';
 import MyReact from './MyReact/MyReact';
 import MyReactDOM from './MyReact/MyReactDom'
 import CounterFn from './components/CounterFn';
+import { counterReducer, myCreateStore } from './MyRedux/myRedux';
+import { MyProvider } from './MyRedux/myReactRedux';
 
 // const Test = <section className="counter__container">
 //   <header>Counter:0</header>
@@ -21,9 +23,12 @@ import CounterFn from './components/CounterFn';
 // console.log(<CounterClass />);
 // console.log(<CounterFn />)
 
+export const myStore = myCreateStore(counterReducer);
 
 ReactDOM.render(
-  <App />
+  <MyProvider store={myStore}>
+    <App />
+  </MyProvider>
   ,
   document.getElementById('root')
 );
