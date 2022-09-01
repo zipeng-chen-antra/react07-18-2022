@@ -6,12 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import CounterClass from './components/CounterClass';
 
 import MyReact from './MyReact/MyReact';
-import MyReactDOM from './MyReact/MyReactDom'
+import MyReactDOM from './MyReact/MyReactDom';
 import CounterFn from './components/CounterFn';
-import { counterReducer, myCreateStore } from './MyRedux/myRedux';
+import {
+  counterReducer,
+  myCreateStore,
+} from './MyRedux/myRedux';
 import { MyProvider } from './MyRedux/myReactRedux';
-
-// const Test = <section className="counter__container">
+import {
+  createStore,
+  applyMiddleware,
+} from 'redux';
+import { Provider } from 'react-redux';
+// const Test =  <section className="counter__container">
 //   <header>Counter:0</header>
 //   <div className="counter__actions">
 //     <button onClick={() => console.log("+")}>+</button>
@@ -23,13 +30,42 @@ import { MyProvider } from './MyRedux/myReactRedux';
 // console.log(<CounterClass />);
 // console.log(<CounterFn />)
 
-export const myStore = myCreateStore(counterReducer);
+export const myStore = myCreateStore(
+  counterReducer
+);
+
+const reduxStore = createStore(
+  counterReducer,
+  applyMiddleware(
+    (store) => (next) => (action) => {
+      if (typeof action === 'function') {
+        action(next)
+      } else {
+        let result = next(action);
+        return result;
+      }
+    },
+    (store) => (next) => (action) => {
+      console.log(action)
+      let result = next(action);
+      return result;
+    },
+    (store) => (next) => (action) => {
+      let result = next(action);
+      console.log(localStorage)
+      localStorage.setItem("state", JSON.stringify(store.getState()))
+      return result;
+    }
+
+  )
+);
 
 ReactDOM.render(
   <MyProvider store={myStore}>
-    <App />
-  </MyProvider>
-  ,
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
+  </MyProvider>,
   document.getElementById('root')
 );
 
