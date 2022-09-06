@@ -7,6 +7,13 @@ import BuyStockClass from "./components/BuyStock/BuyStockClass";
 import StockAmount from "./components/StockAmount/StockAmount";
 import React, { useEffect } from "react";
 import MyReactReduxCounterClass from "./components/MyReactReduxCounterClass";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import { MyRoute, MyLink, MyBrowserRouter } from './MyReactRouter/MyReactRouter'
 
 const pageInfo = [
   {
@@ -46,27 +53,47 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App__header">
-        <nav>
-          <div>
-            "Stock":
-            <StockAmount />
-          </div>
+    <MyBrowserRouter>
+      <div className="App">
+        <header className="App__header">
+          <nav>
+            <div>
+              "Stock":
+              <StockAmount />
+            </div>
 
-          {pageInfo.map((page, index) => (
-            <a
-              href={`./${page.pageName}`}
-              onClick={(e) => handleChangePage(e, page)}
-              key={page.pageName}
-            >
-              {page.pageName}
-            </a>
-          ))}
-        </nav>
-      </header>
-      {renderPage()}
-    </div>
+            {/* {pageInfo.map((page, index) => (
+              <a
+                href={`./${page.pageName}`}
+                onClick={(e) => handleChangePage(e, page)}
+                key={page.pageName}
+              >
+                {page.pageName}
+              </a>
+            ))} */}
+            {
+              pageInfo.map((page, index) => {
+                return <MyLink key={page.pageName} to={`/${page.pageName}`}>{page.pageName}</MyLink>
+              })
+            }
+          </nav>
+        </header>
+        {/* {renderPage()} */}
+        {
+          <>
+            <MyRoute exact path="/CounterFn">
+              <CounterFn />
+            </MyRoute>
+            <MyRoute exact path="/CounterClass">
+              <CounterClass />
+            </MyRoute>
+            <MyRoute exact path="/">
+              <h1>Home</h1>
+            </MyRoute>
+          </>
+        }
+      </div>
+    </MyBrowserRouter>
   );
 }
 
